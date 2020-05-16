@@ -12,5 +12,8 @@
 */
 
 
-Route::resource('/', 'HomeController');
+Route::get('/', function () {
+  return redirect('/operations');
+});
+
 Route::resource('operations', 'OperationController');
