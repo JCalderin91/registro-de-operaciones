@@ -16,4 +16,6 @@ Route::get('/', function () {
   return redirect('/operations');
 });
 
+Route::get('lang/{lang}', 'LanguageController@swap')->name('lang.swap');
+
 Route::resource('operations', 'OperationController');

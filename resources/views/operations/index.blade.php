@@ -2,32 +2,32 @@
 
 @section('content')
 <section class="card mt-3">
-  <div class="card-header">Nuevo registro</div>
+  <div class="card-header">{!! trans('text.title_one') !!}</div>
 
   <div class="card-body p-1">
     <form action="{{route('operations.store')}}" method="post">
       @csrf
       <div class="row">
         <div class="form-group col-md-2">
-          <label>Fecha</label>
-          <input type="date" class="form-control" value="{{old('date')}}" name="date" placeholder="Fecha">
+          <label>{!! trans('text.input_one') !!}</label>
+          <input type="date" class="form-control" value="{{old('date')}}" name="date">
         </div>
         <div class="form-group col-md-5">
-          <label>Descripción</label>
-          <input type="text" class="form-control @error('description') is-invalid @enderror" value="{{old('description')}}" name="description" placeholder="Descripción">
+          <label>{!! trans('text.input_two') !!}</label>
+          <input type="text" class="form-control @error('description') is-invalid @enderror" value="{{old('description')}}" name="description" placeholder="{!! trans('text.placeholder_two') !!}">
           @error('description')
             <small class="text-danger">{{$message}}</small>
           @enderror
         </div>
         <div class="form-group col-md-2">
-          <label>Monto</label>
-          <input type="number" class="form-control @error('mount') is-invalid @enderror" value="{{old('mount')}}" step="any" name="mount" placeholder="Monto">
+          <label>{!! trans('text.input_tree') !!}</label>
+          <input type="number" class="form-control @error('mount') is-invalid @enderror" value="{{old('mount')}}" step="any" name="mount" placeholder="{!! trans('text.placeholder_tree') !!}">
           @error('mount')
             <small class="text-danger">{{$message}}</small>
           @enderror
         </div>
         <div class="form-group col-md-3">
-          <label>Tipo</label>
+          <label>{!! trans('text.input_four') !!}</label>
           <select name="type" class="form-control @error('type') is-invalid @enderror">
             <option value="0">Deuda</option>
             <option value="1">Pago</option>
@@ -37,7 +37,7 @@
           @enderror
         </div>
         <div class="col-sm-12 text-right">
-          <button type="submit" class="btn btn-info">Guardar</button>
+          <button type="submit" class="btn btn-info">{!! trans('text.save') !!}</button>
         </div>
       </div>
     </form>
@@ -46,30 +46,30 @@
 @if ($daysLastPay>0)
 <br>
 <div class="card p-1">
-<p class="mb-0 text-center"> Último pago realizado por concepto de <b>"{{$lastPay->description}}"</b> y un monto de <b>{{$lastPay->mount}}</b> $ hace <b>{{$daysLastPay}}</b> {{$daysLastPay>1?'días':'dia'}}</p>
+<p class="mb-0 text-center"> {!! trans('text.lastPayText_one') !!} <b>"{{$lastPay->description}}"</b> {!! trans('text.lastPayText_two') !!} <b>{{$lastPay->mount}}</b> $ {!! trans('text.lastPayText_tree') !!} <b>{{$daysLastPay}}</b> {!! trans('text.lastPayText_four') !!}</p>
 </div>
 @endif
 <br>
 <div class="card">
-  <div class="card-header">Lista de registros</div>
+  <div class="card-header">{!! trans('text.title_two') !!}</div>
   <div class="card-body p-1">
     <div class="table-responsive">
       <table id="operations" class="table table-sm text-center">
         <thead class="bg-info text-white">
           <tr>
-              <td>#</td>
-              <td>Tipo</td>
-              <td>Descripción</td>
-              <td>Monto</td>
-              <td>Fecha</td>
-            <td>Operación</td>
+            <td>#</td>
+            <td>{!! trans('text.table_one') !!}</td>
+            <td>{!! trans('text.table_two') !!}</td>
+            <td>{!! trans('text.table_tree') !!}</td>
+            <td>{!! trans('text.table_four') !!}</td>
+            <td>{!! trans('text.table_five') !!}</td>
           </tr>
         </thead>
         <tbody>
           @foreach ($operations as $key => $item)
           <tr>
               <td>{{$key+1}}</td>
-              <td><div class="badge badge-{{$item->type === 0 ? 'danger' : 'success'}}">{{$item->type === 0 ? 'Deuda' : 'Pago'}}</div></td>
+              <td><div class="badge badge-{{$item->type === 0 ? 'danger' : 'success'}}">{{$item->type === 0 ? trans('text.value_two') : trans('text.value_one') }}</div></td>
               <td>{{$item->description}}</td>
               <td>{{$item->mount}} $</td>
               <td>{{\Carbon\Carbon::parse($item->date)->format('d-m-y')}}</td>
@@ -78,10 +78,10 @@
               <form action="{{route('operations.destroy', $item->id)}}" method="post">
                 @csrf
                 @method('DELETE')
-                <button class="btn btn-outline-warning btn-sm" type="submit">Anular</button>
+                <button class="btn btn-outline-warning btn-sm" type="submit">{!! trans('text.operation_one') !!}</button>
               </form>
               @else
-              Anulado
+              {!! trans('text.operation_two') !!}
               @endif
             </td>
           </tr>
@@ -97,7 +97,7 @@
 <div class="row">
   <div class="col-md-6">
     <div class="card">
-      <div class="card-header">Gráfica</div>
+      <div class="card-header">{!! trans('text.title_tree') !!}</div>
       <div class="card-body p-1">
         <canvas id="barChart"></canvas>
       </div>
@@ -105,15 +105,15 @@
   </div>
   <div class="col-md-6">
     <div class="card">
-        <div class="card-header">Resumen</div>
+        <div class="card-header">{!! trans('text.title_four') !!}</div>
             <div class="card-body p-1">
                 <div class="table-responsive">
                   <table class="table table-sm text-center">
                       <thead class="bg-info text-white">
                       <tr>
-                          <td>Deuda</td>
-                          <td>Pagado</td>
-                          <td>Saldo</td>
+                          <td>{!! trans('text.table_six') !!}</td>
+                          <td>{!! trans('text.table_seven') !!}</td>
+                          <td>{!! trans('text.table_eight') !!}</td>
                       </tr>
                       </thead>
                       <tbody>
@@ -135,11 +135,15 @@
 @section('scriptpage')
 <script>
   $(document).ready(function(){
-    $('#operations').DataTable({
+    $('#operations').DataTable(
+      @if(App::getLocale() == 'es')
+      {
 	        language: {
 	            url: "{{asset('assets/js/spanish.json')}}"
 	        }
-	    });
+      }
+      @endif
+      );
   })
 var ctx = document.getElementById("barChart");
 var myChart = new Chart(ctx, {
@@ -151,7 +155,7 @@ var myChart = new Chart(ctx, {
       hoverBackgroundColor: ['#08c501aa', '#c51010aa'],
       borderColor: 'transparent',
     }],
-    labels: ["Pagos", "Deudas"]
+    labels: ["{!! trans('text.table_six') !!}", "{!! trans('text.table_seven') !!}"]
   },
   options: {
     responsive: true,
