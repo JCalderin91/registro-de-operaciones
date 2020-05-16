@@ -12,7 +12,7 @@ return [
     'input_four' => 'Tipo',
     'lastPayText_one' => 'Último pago realizado por concepto de',
     'lastPayText_two' => 'y un monto de',
-    'lastPayText_tree' => 'hece',
+    'lastPayText_tree' => 'hace',
     'lastPayText_four' => 'días',
     'title_two' => 'Lista de registros',
     'title_tree' => 'Gráfica',
