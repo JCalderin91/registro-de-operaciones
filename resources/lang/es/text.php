@@ -18,7 +18,7 @@ return [
     'title_tree' => 'Gráfica',
     'graph_one' => 'Deuda',
     'graph_two' => 'Pagado',
-    'title_tree' => 'Resumen',
+    'title_four' => 'Resumen',
 
     'table_one' => 'Tipo',
     'table_two' => 'Descripción',
