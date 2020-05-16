@@ -43,7 +43,12 @@
     </form>
   </div>
 </section>
-
+@if ($daysLastPay>0)
+<br>
+<div class="card p-1">
+<p class="mb-0 text-center"> Último pago realizado por concepto de <b>"{{$lastPay->description}}"</b> y un monto de <b>{{$lastPay->mount}}</b> $ hace <b>{{$daysLastPay}}</b> {{$daysLastPay>1?'días':'dia'}}</p>
+</div>
+@endif
 <br>
 <div class="card">
   <div class="card-header">Lista de registros</div>
@@ -103,22 +108,22 @@
         <div class="card-header">Resumen</div>
             <div class="card-body p-1">
                 <div class="table-responsive">
-                <table class="table table-sm text-center">
-                    <thead class="bg-info text-white">
-                    <tr>
-                        <td>Deuda</td>
-                        <td>Pagado</td>
-                        <td>Saldo</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>{{$debe}} $</td>
-                        <td>{{$haber}} $</td>
-                        <td>{{$saldo}} $</td>
-                    </tr>
-                    </tbody>
-                </table>
+                  <table class="table table-sm text-center">
+                      <thead class="bg-info text-white">
+                      <tr>
+                          <td>Deuda</td>
+                          <td>Pagado</td>
+                          <td>Saldo</td>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                          <td>{{$debe}} $</td>
+                          <td>{{$haber}} $</td>
+                          <td>{{$saldo}} $</td>
+                      </tr>
+                      </tbody>
+                  </table>
                 </div>
             </div>
         </div>
