@@ -155,7 +155,7 @@ var myChart = new Chart(ctx, {
       hoverBackgroundColor: ['#08c501aa', '#c51010aa'],
       borderColor: 'transparent',
     }],
-    labels: ["{!! trans('text.table_six') !!}", "{!! trans('text.table_seven') !!}"]
+    labels: ["{!! trans('text.table_seven') !!}", "{!! trans('text.table_six') !!}"]
   },
   options: {
     responsive: true,

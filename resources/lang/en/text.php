@@ -27,7 +27,7 @@ return [
     'table_five' => 'Operation',
 
     'operation_one' => 'Cancel',
-    'operation_two' => 'Voided',
+    'operation_two' => 'Cancelled',
 
     'value_one' => 'Payment',
     'value_two' => 'Debt',
