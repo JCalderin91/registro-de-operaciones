@@ -22,7 +22,8 @@ class OperationController extends Controller
     $saldo = $haber - $debe;
 
     $lastPay = $operations->where('type', 1)->where('status', 1)->first();
-    $daysLastPay = Carbon::now()->diffInDays($lastPay->date);
+
+    $daysLastPay = $lastPay ? Carbon::now()->diffInDays($lastPay->date) : 0;
 
     return view('operations.index', compact(['operations', 'debe', 'haber', 'saldo', 'daysLastPay', 'lastPay']));
   }
