@@ -11,6 +11,7 @@
   <!-- Styles -->
   <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
   <link rel="stylesheet" href="{{asset('assets/css/dataTables.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/fonts/font-awesome.min.css')}}">
   <style>
     body {
       background-color: #012325;
@@ -21,23 +22,14 @@
         right: 10px;
     }
   </style>
-  @yield('csspage')
+  @yield('css')
 </head>
 
 <body>
 
-  <div class="container pb-5 mt-5">
+  @include('layouts.partials.navbar')
+  <div class="container pb-5 mt-1">
     @include('layouts.flash-messages')
-    <!--Comprobamos si el status esta a true y existe más de un lenguaje-->
-    @if (config('locale.status') && count(config('locale.languages')) > 1)
-    <div class="top-right links">
-        @foreach (array_keys(config('locale.languages')) as $lang)
-        @if ($lang != App::getLocale())
-        <a class="btn btn-secondary" href="{!! route('lang.swap', $lang) !!}">{!! $lang !!}</a>
-        @endif
-        @endforeach
-    </div>
-    @endif
     @yield('content')
   </div>
   <script src="{{asset('assets/js/jquery.js')}}"></script>
@@ -47,7 +39,7 @@
   <script src="{{asset('assets/js/chart/chart.extension.js')}}"></script>
   <script src="{{asset('assets/js/datatable.js')}}"></script>
   <script src="{{asset('assets/js/BootstrapDatTable.js')}}"></script>
-  @yield('scriptpage')
+  @yield('js')
 </body>
 
 </html>

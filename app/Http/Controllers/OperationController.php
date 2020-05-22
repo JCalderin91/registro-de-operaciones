@@ -16,7 +16,7 @@ class OperationController extends Controller
    */
   public function index()
   {
-    $operations = Operation::orderBy('date', 'desc')->get();
+    $operations = Operation::whereNotIn('status', [0])->orderBy('id', 'desc')->orderBy('date', 'desc')->get();
     $debe = Operation::where('type', 0)->where('status', 1)->sum('mount');
     $haber = Operation::where('type', 1)->where('status', 1)->sum('mount');
     $saldo = $haber - $debe;
@@ -75,7 +75,7 @@ class OperationController extends Controller
    */
   public function edit(Operation $operation)
   {
-    //
+    return view('operations.form', compact(['operation']));
   }
 
   /**
@@ -87,7 +87,10 @@ class OperationController extends Controller
    */
   public function update(Request $request, Operation $operation)
   {
-    //
+    $data = $request->all();
+    $data['status'] = 1;
+    $operation->update($data);
+    return redirect()->route('operations.index')->withSuccess('Operación actualizada');
   }
 
   /**
@@ -98,7 +101,13 @@ class OperationController extends Controller
    */
   public function destroy(Operation $operation)
   {
-    $operation->update(['status' => 0]);
-    return redirect()->route('operations.index')->withSuccess('Registro anulado correctamente');
+    if($operation->status === 2){
+      $operation->update(['status' => 0]);
+      $msg = 'Registro borrado correctamente';
+    }else{
+      $operation->update(['status' => 2]);
+      $msg = 'Registro anulado correctamente';
+    }
+    return redirect()->route('operations.index')->withSuccess($msg);
   }
 }
